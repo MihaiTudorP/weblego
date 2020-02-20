@@ -1,0 +1,38 @@
+{
+  "devDependencies": {
+    "typescript": "^3.7.5"
+  },
+  "dependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/node": "^13.7.2",
+    "axios": "^0.19.2",
+    "prettier": "^1.19.1"
+  },
+  "name": "weblego",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start:db": "json-server -w db.json",
+    "start:parcel": "parcel index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "prettier": {
+    "arrowParens": "avoid",
+    "bracketSpacing": true,
+    "endOfLine": "auto",
+    "htmlWhitespaceSensitivity": "css",
+    "jsxBracketSameLine": false,
+    "printWidth": 100,
+    "proseWrap": "always",
+    "requirePragma": false,
+    "jsxSingleQuote": true,
+    "trailingComma": "es5",
+    "useTabs": false,
+    "tabWidth": 4,
+    "semi": true,
+    "singleQuote": true
+  }
+}
