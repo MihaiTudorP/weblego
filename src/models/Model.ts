@@ -29,22 +29,16 @@ export class Model<T extends Identifiable> {
         private sync: Sync<T>
     ) {}
 
-    get on() {
-        return this.events.on;
-    }
+    on = this.events.on;
 
-    get get() {
-        return this.attributes.get;
-    }
+    get = this.attributes.get;
 
     set(update: T): void {
         this.attributes.set(update);
         this.events.trigger('change');
     }
 
-    get trigger() {
-        return this.events.trigger;
-    }
+    trigger = this.events.trigger;
 
     fetch(): void {
         const id = this.attributes.get('id');
