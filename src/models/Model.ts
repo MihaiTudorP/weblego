@@ -49,10 +49,11 @@ export class Model<T extends Identifiable> {
         });
     }
 
-    save() {
+        save(): void {
         this.sync
             .save(this.attributes.getAll())
-            .then(() => {
+            .then((response: AxiosResponse) => {
+                this.attributes.set(response.data);
                 this.trigger('save');
             })
             .catch(() => {

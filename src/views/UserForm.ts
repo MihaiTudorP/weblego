@@ -1,52 +1,27 @@
-import { User } from '../models/User';
+import { User, UserProps } from '../models/User';
+import { View } from './View';
 
-export class UserForm{
-    constructor(public parent: Element, public model: User) {
-        this.bindModel();
-    }
-
-    bindModel(){
-        this.model.on('change', ()=>{
-            this.parent.innerHTML = '';
-            this.render();``
-        })
+export class UserForm extends View<User, UserProps>{
+    constructor(parent: Element, model: User) {
+        super(parent, model);
     }
     eventsMap(): { [key: string]: ()=> void }{
         return {
             'click:.set-age': this.onSetAgeClick,
             'click:#update-name': this.onSetNameClick,
+            'click:.save-model': this.onSaveClick
         }
     }
 
     template = (): string =>{
         return `
             <div>
-                <h1>User form</h1>
-                <div>User name: ${this.model.get('name')}</div>
-                <div>Age: ${this.model.get('age')}</div>
-                <input id = "name-field"/>
+                <input id = "name-field" placeholder="${this.model.get('name')}"/>
                 <button id="update-name">Update name</button>
                 <button class="set-age">Set random age</button>
+                <button class="save-model">Save user</button>
             </div>
         `
-    };
-    bindEvents(documentFragment: DocumentFragment): void{
-        const eventsMap = this.eventsMap();
-
-        for (let eventKey in eventsMap){
-            const [eventName, selector] = eventKey.split(':');
-
-            documentFragment.querySelectorAll(selector).forEach((element)=>{
-                element.addEventListener(eventName, eventsMap[eventKey]);
-            })
-        }
-    }
-
-    render = (): void =>{
-        const element = document.createElement('template');
-        element.innerHTML = this.template();
-        this.bindEvents(element.content);
-        this.parent.append(element.content);
     };
 
     onSetAgeClick = (): void => {
@@ -60,4 +35,8 @@ export class UserForm{
             this.model.set({ name: value })
         } else throw new Error('Input not found');
     };
+
+    onSaveClick = (): void => {
+        this.model.save();
+    }
 }

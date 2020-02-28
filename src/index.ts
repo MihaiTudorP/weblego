@@ -1,9 +1,8 @@
-import { UserForm } from './views/UserForm';
 import { User } from './models/User';
+import { UserEdit } from './views/UserEdit';
 
 const user = User.buildUser({name: 'Name', age: 20});
 const container = document.getElementById('root');
 if(!container) throw new Error('Unable to render form');
-const userForm = new UserForm(container, user);
-
-userForm.render();
+const userEdit = new UserEdit(container, user);
+userEdit.render();
