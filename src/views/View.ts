@@ -14,7 +14,6 @@ export abstract class View<T extends Model<K>, K> {
         const reRender = () => {
             this.parent.innerHTML = '';
             this.render();
-            ``;
         };
         this.model.on('change', reRender);
         this.model.on('save', reRender);
